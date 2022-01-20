@@ -14,6 +14,12 @@ non-exhaustive list of the possible categories issues could fall in:
 - Fixes - for any bug fixes
 - Documentation - for changes to the package that are purely for purposes of documentation
 
+## Current version 
+
+### Fixes
+
+* [Issue 79](https://github.com/j-c-cook/ghedt/issues/79) - Fixes the possibility for the peak load analysis tool to determine a negative peak load duration when the first month contains no load.  
+
 ## Version 0.1
 
 ### Documentation
