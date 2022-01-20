@@ -607,23 +607,26 @@ class HybridLoad:
                 # Place the peaks roughly midway through the day they occur on.
                 # (In JDS's opinion, this should be amply accurate for the
                 # hybrid time step.)
+                # Catch the first and last peak hours to make sure they aren't 0
+                # Could only be 0 when the first month has no load.
                 first_hour_heating_peak = \
                     firstmonthhour(i) + (self.monthly_peak_hl_day[i] - 1) \
                     * 24 + 12 - (self.monthly_peak_hl_duration[i] / 2)
-                if first_hour_heating_peak < 0:
-                    print('First hour heating peak < 0: {}'.format(i))
+                if first_hour_heating_peak < 0.:
                     first_hour_heating_peak = 1.0e-6
-                last_hour_heating_peak = first_hour_heating_peak + \
-                                         self.monthly_peak_hl_duration[i]
-                if last_hour_heating_peak < 0:
-                    print('Last hour heating peak < 0: {}'.format(i))
+                last_hour_heating_peak = \
+                    first_hour_heating_peak + self.monthly_peak_hl_duration[i]
+                if last_hour_heating_peak < 0.:
                     last_hour_heating_peak = 1.0e-6
-                first_hour_cooling_peak = firstmonthhour(i) + (
-                            self.monthly_peak_cl_day[i] - 1) * 24 + 12 - \
-                                          self.monthly_peak_cl_duration[
-                                              i] / 2
+                first_hour_cooling_peak = \
+                    firstmonthhour(i) + (self.monthly_peak_cl_day[i] - 1) * 24 \
+                    + 12 - self.monthly_peak_cl_duration[i] / 2
+                if first_hour_cooling_peak < 0.:
+                    first_hour_cooling_peak = 1.0e-06
                 last_hour_cooling_peak = first_hour_cooling_peak + \
                                          self.monthly_peak_cl_duration[i]
+                if last_hour_cooling_peak < 0.:
+                    last_hour_cooling_peak = 1.0e-06
             else:  # peak load not used this month
                 mduration = monthdays(i) * 24
                 mload = self.monthly_cl[i] - self.monthly_hl[i]
