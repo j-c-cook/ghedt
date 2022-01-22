@@ -434,6 +434,7 @@ class HybridLoad:
         two_day_fluid_temps_nm.append(dT_fluid_nm)
 
         dT_fluid_nm_max = max(dT_fluid_nm)
+        dT_fluid_pk_max = max(dT_fluid_pk)
 
         if dT_fluid_nm_max > 0.0:
             f = scipy.interpolate.interp1d(dT_fluid_pk, hour_time)
@@ -447,6 +448,9 @@ class HybridLoad:
         # Find the peak durations using hourly simulations for 2 days
 
         for i in range(1, len(self.days_in_month)):
+            print('The current month is: {}'.format(i))
+            if i == 5:
+                a = 1
             # Scale all the loads by the peak load
             # Perform an hourly simulation with the scaled loads
             # Perform an hourly simulation with a load of 1, or the peak loads
