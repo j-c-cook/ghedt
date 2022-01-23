@@ -15,7 +15,7 @@ class Design:
                  grout: plat.media.Grout, soil: plat.media.Soil,
                  sim_params: plat.media.SimulationParameters,
                  geometric_constraints: dt.media.GeometricConstraints,
-                 hourly_extraction_ground_loads: list,
+                 hourly_extraction_ground_loads: list, method: str = 'hybrid',
                  routine: str = 'near-square', flow: str = 'borehole'):
         self.V_flow = V_flow  # volumetric flow rate, m3/s
         self.borehole = borehole
@@ -27,6 +27,7 @@ class Design:
         self.sim_params = sim_params
         self.geometric_constraints = geometric_constraints
         self.hourly_extraction_ground_loads = hourly_extraction_ground_loads
+        self.method = method
 
         # Check the routine parameter
         self.routine = routine
@@ -76,28 +77,29 @@ class Design:
                 self.coordinates_domain, self.V_flow, self.borehole,
                 self.bhe_object, self.fluid, self.pipe, self.grout,
                 self.soil, self.sim_params, self.hourly_extraction_ground_loads,
-                flow=self.flow, disp=disp)
+                method=self.method, flow=self.flow, disp=disp)
         # Find a rectangle
         elif self.routine == 'rectangle':
             bisection_search = dt.search_routines.Bisection1D(
                 self.coordinates_domain, self.V_flow, self.borehole,
                 self.bhe_object, self.fluid, self.pipe, self.grout, self.soil,
                 self.sim_params, self.hourly_extraction_ground_loads,
-                flow=self.flow, disp=disp)
+                method=self.method, flow=self.flow, disp=disp)
         # Find a bi-rectangle
         elif self.routine == 'bi-rectangle':
             bisection_search = dt.search_routines.Bisection2D(
                 self.coordinates_domain_nested, self.V_flow,
                 self.borehole, self.bhe_object, self.fluid, self.pipe,
                 self.grout, self.soil, self.sim_params,
-                self.hourly_extraction_ground_loads, flow=self.flow, disp=disp)
+                self.hourly_extraction_ground_loads, method=self.method,
+                flow=self.flow, disp=disp)
         # Find bi-zoned rectangle
         elif self.routine == 'bi-zoned':
             bisection_search = dt.search_routines.BisectionZD(
                 self.coordinates_domain_nested, self.V_flow, self.borehole,
                 self.bhe_object, self.fluid, self.pipe, self.grout, self.soil,
                 self.sim_params, self.hourly_extraction_ground_loads,
-                flow=self.flow, disp=disp)
+                method=self.method, flow=self.flow, disp=disp)
         else:
             raise ValueError('The requested routine is not available. '
                              'The currently available routines are: '
