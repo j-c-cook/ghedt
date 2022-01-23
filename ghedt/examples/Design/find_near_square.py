@@ -122,12 +122,15 @@ def main():
     hourly_extraction_ground_loads: list = \
         hourly_extraction[list(hourly_extraction.keys())[0]]
 
-    # Geometric constraints for the `near-square` routine
-    # Required geometric constraints for the uniform rectangle design: B
-    geometric_constraints = dt.media.GeometricConstraints(B=B)
-
-    title = 'Find near square...'
-    print(title + '\n' + len(title) * '=')
+    """ Geometric constraints for the `near-square` routine.
+    Required geometric constraints for the uniform rectangle design:
+      - B
+      - length
+    """
+    # B is already defined above
+    number_of_boreholes = 32
+    length = dt.utilities.length_of_side(number_of_boreholes, B)
+    geometric_constraints = dt.media.GeometricConstraints(B=B, length=length)
 
     # Single U-tube
     # -------------
@@ -138,7 +141,7 @@ def main():
 
     # Find the near-square design for a single U-tube and size it.
     tic = clock()
-    bisection_search = design_single_u_tube.find_design()
+    bisection_search = design_single_u_tube.find_design(disp=True)
     bisection_search.ghe.compute_g_functions()
     bisection_search.ghe.size(method='hybrid')
     toc = clock()

@@ -13,6 +13,7 @@ import numpy as np
 import json
 from matplotlib.ticker import Locator
 import pickle
+import warnings
 
 
 # Time functions
@@ -54,17 +55,17 @@ def polygonal_area(corners):
     area = abs(area) / 2.0
     return area
 
-
-def set_shank(configuration: str, rb: float, r_in: float, r_out: float):
-    raise ValueError('This function is incomplete.')
-    if configuration == 'A':
-        a = 1
-    elif configuration == 'B':
-        a = 1
-    elif configuration == 'C':
-        a = 1
-    else:
-        raise ValueError('Only configurations A, B, or C are valid.')
+# TODO: Add `set_shank` functionality to utilities.py
+# def set_shank(configuration: str, rb: float, r_in: float, r_out: float):
+#     raise ValueError('This function is incomplete.')
+#     if configuration == 'A':
+#         a = 1
+#     elif configuration == 'B':
+#         a = 1
+#     elif configuration == 'C':
+#         a = 1
+#     else:
+#         raise ValueError('Only configurations A, B, or C are valid.')
 
 
 def make_rectangle_perimeter(length_x, length_y, origin=(0, 0)):
@@ -76,6 +77,21 @@ def make_rectangle_perimeter(length_x, length_y, origin=(0, 0)):
          [origin_x + length_x, origin_y + length_y],
          [origin_x, origin_y + length_y]]
     return rectangle_perimeter
+
+
+def number_of_boreholes(length, B, func=np.ceil):
+    N = func(length / B) + 1
+    return int(N)
+
+
+def length_of_side(N, B):
+    L = (N - 1) * B
+    return L
+
+
+def spacing_along_length(L, N):
+    B = L / (N - 1)
+    return B
 
 
 # Design oriented functions
@@ -90,19 +106,18 @@ def sign(x: float) -> int:
     return int(abs(x) / x)
 
 
-def check_bracket(sign_xL, sign_xR, disp=False) -> bool:
+def check_bracket(sign_xL, sign_xR, disp=None) -> bool:
+    if disp is not None:
+        warnings.warn('The disp option in check_bracket will be removed in '
+                      'the ghedt 0.2 release.')
     if sign_xL < 0 < sign_xR:
-        if disp:
-            print('Bracketed the root')
+        # Bracketed the root
         return True
     elif sign_xR < 0 < sign_xL:
-        if disp:
-            print('Bracketed the root')
+        # Bracketed the root
         return True
     else:
-        if disp:
-            print('The root has not been bracketed, '
-                  'this method will return false.')
+        # The root has not been bracketed, this method will return false.
         return False
 
 

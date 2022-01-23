@@ -4,6 +4,7 @@
 import ghedt as dt
 import ghedt.peak_load_analysis_tool as plat
 import pygfunction as gt
+import numpy as np
 
 
 # Common design interface
@@ -36,10 +37,17 @@ class Design:
         if routine in available_routines:
             # If a near-square design routine is requested, then we go from a
             # 1x1 to 32x32 at the B-spacing
+            # The lower end of the near-square routine is always 1 borehole.
+            # There would never be a time that a user would __need__ to give a
+            # different lower range. The upper number of boreholes range is
+            # calculated based on the spacing and length provided.
             if routine == 'near-square':
+                number_of_boreholes = \
+                    dt.utilities.number_of_boreholes(
+                        gc.length, gc.B, func=np.floor)
                 self.coordinates_domain = \
                     dt.domains.square_and_near_square(
-                        1, 32, self.geometric_constraints.B)
+                        1, number_of_boreholes, self.geometric_constraints.B)
             elif routine == 'rectangle':
                 self.coordinates_domain = dt.domains.rectangular(
                     gc.length, gc.width, gc.B_min, gc.B_max_x, disp=False
@@ -59,6 +67,9 @@ class Design:
         self.flow = flow
 
     def find_design(self, disp=False):
+        if disp:
+            title = 'Find {}...'.format(self.routine)
+            print(title + '\n' + len(title) * '=')
         # Find near-square
         if self.routine == 'near-square':
             bisection_search = dt.search_routines.Bisection1D(
@@ -79,14 +90,14 @@ class Design:
                 self.coordinates_domain_nested, self.V_flow,
                 self.borehole, self.bhe_object, self.fluid, self.pipe,
                 self.grout, self.soil, self.sim_params,
-                self.hourly_extraction_ground_loads, flow=self.flow, disp=False)
+                self.hourly_extraction_ground_loads, flow=self.flow, disp=disp)
         # Find bi-zoned rectangle
         elif self.routine == 'bi-zoned':
             bisection_search = dt.search_routines.BisectionZD(
                 self.coordinates_domain_nested, self.V_flow, self.borehole,
                 self.bhe_object, self.fluid, self.pipe, self.grout, self.soil,
                 self.sim_params, self.hourly_extraction_ground_loads,
-                flow=self.flow, disp=False)
+                flow=self.flow, disp=disp)
         else:
             raise ValueError('The requested routine is not available. '
                              'The currently available routines are: '

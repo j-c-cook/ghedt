@@ -137,7 +137,10 @@ class TestNearSquare(unittest.TestCase, DesignBase):
         # Geometric constraints for the `near-square` routine
         # Required geometric constraints for the uniform rectangle design: B
         B = 5.  # Borehole spacing (m)
-        self.geometric_constraints = dt.media.GeometricConstraints(B=B)
+        number_of_boreholes = 32
+        length = dt.utilities.length_of_side(number_of_boreholes, B)
+        self.geometric_constraints = \
+            dt.media.GeometricConstraints(B=B, length=length)
 
     def test_design_selection(self):
         # Single U-tube
