@@ -5,6 +5,7 @@ import ghedt as dt
 import ghedt.peak_load_analysis_tool as plat
 import pygfunction as gt
 import numpy as np
+import textwrap
 
 
 # Common design interface
@@ -28,6 +29,20 @@ class Design:
         self.geometric_constraints = geometric_constraints
         self.hourly_extraction_ground_loads = hourly_extraction_ground_loads
         self.method = method
+        if self.method == 'hourly':
+            msg = 'Note: It is not recommended to perform a field selection ' \
+                  'with the hourly simulation due to computation time. If ' \
+                  'the goal is to validate the selected field with the ' \
+                  'hourly simulation, the better solution is to utilize the ' \
+                  'hybrid simulation to automatically select the field. Then ' \
+                  'perform a sizing routine on the selected GHE with the ' \
+                  'hourly simulation.'
+            # Wrap the text to a 50 char line width and print it
+            wrapper = textwrap.TextWrapper(width=72)
+            word_list = wrapper.wrap(text=msg)
+            for element in word_list:
+                print(element)
+            print('\n')
 
         # Check the routine parameter
         self.routine = routine
