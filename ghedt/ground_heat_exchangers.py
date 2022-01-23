@@ -217,8 +217,8 @@ class GHE(BaseGHE):
             self, V_flow_system, B_spacing, bhe_object, fluid, borehole, pipe,
             grout, soil, GFunction, sim_params, hourly_extraction_ground_loads)
 
-        # Split the extraction loads into heating and cooling for input to the
-        # HybridLoad object
+        # Split the extraction loads into heating and cooling for input to
+        # the HybridLoad object
         hourly_rejection_loads, hourly_extraction_loads = \
             plat.ground_loads.HybridLoad.split_heat_and_cool(
                 self.hourly_extraction_ground_loads)

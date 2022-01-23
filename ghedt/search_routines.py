@@ -16,8 +16,8 @@ class Bisection1D:
                  fluid: gt.media.Fluid, pipe: plat.media.Pipe,
                  grout: plat.media.Grout, soil: plat.media.Soil,
                  sim_params: plat.media.SimulationParameters,
-                 hourly_extraction_ground_loads: list, flow: str = 'borehole',
-                 max_iter=15, disp=False, search=True):
+                 hourly_extraction_ground_loads: list, method: str = 'hybrid',
+                 flow: str = 'borehole', max_iter=15, disp=False, search=True):
 
         # Take the lowest part of the coordinates domain to be used for the
         # initial setup
@@ -28,6 +28,7 @@ class Bisection1D:
         self.flow = flow
         V_flow_system, m_flow_borehole = \
             self.retrieve_flow(coordinates, fluid.rho)
+        self.method = method
 
         self.log_time = dt.utilities.Eskilson_log_times()
         self.bhe_object = bhe_object
@@ -99,7 +100,7 @@ class Bisection1D:
     def calculate_excess(self, coordinates, H):
         self.initialize_ghe(coordinates, H)
         # Simulate after computing just one g-function
-        max_HP_EFT, min_HP_EFT = self.ghe.simulate()
+        max_HP_EFT, min_HP_EFT = self.ghe.simulate(method=self.method)
         T_excess = self.ghe.cost(max_HP_EFT, min_HP_EFT)
 
         # This is more of a debugging statement. May remove it in the future.
@@ -216,8 +217,8 @@ class Bisection2D(Bisection1D):
                  fluid: gt.media.Fluid, pipe: plat.media.Pipe,
                  grout: plat.media.Grout, soil: plat.media.Soil,
                  sim_params: plat.media.SimulationParameters,
-                 hourly_extraction_ground_loads: list, flow: str = 'borehole',
-                 max_iter=15, disp=False):
+                 hourly_extraction_ground_loads: list, method: str = 'hybrid',
+                 flow: str = 'borehole', max_iter=15, disp=False):
         if disp:
             print('Note: This routine requires a nested bisection search.')
 
@@ -226,8 +227,8 @@ class Bisection2D(Bisection1D):
         Bisection1D.__init__(
             self, coordinates_domain, V_flow, borehole, bhe_object,
             fluid, pipe, grout, soil, sim_params,
-            hourly_extraction_ground_loads, flow=flow, max_iter=max_iter,
-            disp=disp, search=False)
+            hourly_extraction_ground_loads, method=method, flow=flow,
+            max_iter=max_iter, disp=disp, search=False)
 
         self.coordinates_domain_nested = []
         self.calculated_temperatures_nested = []
@@ -262,8 +263,8 @@ class BisectionZD(Bisection1D):
                  fluid: gt.media.Fluid, pipe: plat.media.Pipe,
                  grout: plat.media.Grout, soil: plat.media.Soil,
                  sim_params: plat.media.SimulationParameters,
-                 hourly_extraction_ground_loads: list, flow: str = 'borehole',
-                 max_iter=15, disp=False):
+                 hourly_extraction_ground_loads: list, method: str = 'hybrid',
+                 flow: str = 'borehole', max_iter=15, disp=False):
         if disp:
             print('Note: This design routine currently requires several '
                   'bisection searches.')
@@ -273,8 +274,8 @@ class BisectionZD(Bisection1D):
         Bisection1D.__init__(
             self, coordinates_domain, V_flow, borehole, bhe_object,
             fluid, pipe, grout, soil, sim_params,
-            hourly_extraction_ground_loads, flow=flow, max_iter=max_iter,
-            disp=disp, search=False)
+            hourly_extraction_ground_loads, method=method, flow=flow,
+            max_iter=max_iter, disp=disp, search=False)
 
         self.coordinates_domain_nested = coordinates_domain_nested
         self.calculated_temperatures_nested = {}
