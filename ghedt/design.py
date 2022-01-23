@@ -90,14 +90,14 @@ class Design:
                 self.coordinates_domain_nested, self.V_flow,
                 self.borehole, self.bhe_object, self.fluid, self.pipe,
                 self.grout, self.soil, self.sim_params,
-                self.hourly_extraction_ground_loads, flow=self.flow, disp=False)
+                self.hourly_extraction_ground_loads, flow=self.flow, disp=disp)
         # Find bi-zoned rectangle
         elif self.routine == 'bi-zoned':
             bisection_search = dt.search_routines.BisectionZD(
                 self.coordinates_domain_nested, self.V_flow, self.borehole,
                 self.bhe_object, self.fluid, self.pipe, self.grout, self.soil,
                 self.sim_params, self.hourly_extraction_ground_loads,
-                flow=self.flow, disp=False)
+                flow=self.flow, disp=disp)
         else:
             raise ValueError('The requested routine is not available. '
                              'The currently available routines are: '

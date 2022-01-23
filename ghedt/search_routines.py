@@ -218,6 +218,9 @@ class Bisection2D(Bisection1D):
                  sim_params: plat.media.SimulationParameters,
                  hourly_extraction_ground_loads: list, flow: str = 'borehole',
                  max_iter=15, disp=False):
+        if disp:
+            print('Note: This routine requires a nested bisection search.')
+
         # Get a coordinates domain for initialization
         coordinates_domain = coordinates_domain_nested[0]
         Bisection1D.__init__(
@@ -261,6 +264,10 @@ class BisectionZD(Bisection1D):
                  sim_params: plat.media.SimulationParameters,
                  hourly_extraction_ground_loads: list, flow: str = 'borehole',
                  max_iter=15, disp=False):
+        if disp:
+            print('Note: This design routine currently requires several '
+                  'bisection searches.')
+
         # Get a coordinates domain for initialization
         coordinates_domain = coordinates_domain_nested[0]
         Bisection1D.__init__(

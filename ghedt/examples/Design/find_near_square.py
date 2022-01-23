@@ -124,8 +124,8 @@ def main():
 
     """ Geometric constraints for the `near-square` routine.
     Required geometric constraints for the uniform rectangle design:
-    - B
-    - length
+      - B
+      - length
     """
     # B is already defined above
     number_of_boreholes = 32

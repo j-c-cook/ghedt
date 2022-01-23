@@ -130,9 +130,13 @@ def main():
     B_min = 3.  # m
     B_max = 10.  # m
 
-    # Geometric constraints for the `find_rectangle` routine
-    # Required geometric constraints for the uniform rectangle design: length,
-    # width, B_min, B_max
+    """ Geometric constraints for the `find_rectangle` routine.
+    Required geometric constraints for the uniform rectangle design: 
+      - length
+      - width 
+      - B_min
+      - B_max
+    """
     geometric_constraints = dt.media.GeometricConstraints(
         length=length, width=width, B_min=B_min, B_max_x=B_max)
 
