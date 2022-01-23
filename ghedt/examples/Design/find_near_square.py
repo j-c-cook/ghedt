@@ -137,7 +137,7 @@ def main():
     design_single_u_tube = dt.design.Design(
         V_flow, borehole, single_u_tube, fluid, pipe_single, grout,
         soil, sim_params, geometric_constraints, hourly_extraction_ground_loads,
-        flow=flow, routine='near-square')
+        method='hybrid', flow=flow, routine='near-square')
 
     # Find the near-square design for a single U-tube and size it.
     tic = clock()
