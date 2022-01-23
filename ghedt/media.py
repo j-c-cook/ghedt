@@ -26,6 +26,7 @@ class GeometricConstraints:
         # The required instances for the near-square design is self.B
         if method == 'near-square':
             assert self.B is not None
+            assert self.length is not None
         elif method == 'rectangle':
             assert self.width is not None
             assert self.length is not None

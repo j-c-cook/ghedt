@@ -129,15 +129,16 @@ def main():
     B_max_x = 10.  # m
     B_max_y = 12.  # m
 
-    # Geometric constraints for the `find_rectangle` routine
-    # Required geometric constraints for the uniform rectangle design: length,
-    # width, B_min, B_max
+    """ Geometric constraints for the `bi-zoned` routine.
+    Required geometric constraints for the bi-zoned design: 
+      - length
+      - width
+      - B_min
+      - B_max
+    """
     geometric_constraints = dt.media.GeometricConstraints(
         length=length, width=width, B_min=B_min, B_max_x=B_max_x,
         B_max_y=B_max_y)
-
-    title = 'Find bi-zoned rectangle'
-    print(title + '\n' + len(title) * '=')
 
     # Single U-tube
     # -------------
@@ -148,7 +149,7 @@ def main():
 
     # Find a constrained rectangular design for a single U-tube and size it.
     tic = clock()
-    bisection_search = design_single_u_tube.find_design()
+    bisection_search = design_single_u_tube.find_design(disp=True)
     bisection_search.ghe.compute_g_functions()
     bisection_search.ghe.size(method='hybrid')
     toc = clock()
