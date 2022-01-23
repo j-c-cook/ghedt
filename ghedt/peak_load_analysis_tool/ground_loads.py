@@ -259,7 +259,7 @@ class HybridLoad:
             if l_hour >= 0.0:
                 # Heat is extracted from ground when > 0
                 hourly_extraction_loads[i] = l_hour / scale
-            elif l_hour < 0.0:
+            else:
                 # Heat is rejected to ground when < 0
                 hourly_rejection_loads[i] = l_hour / -scale
 
@@ -455,8 +455,18 @@ class HybridLoad:
             # two day cooling loads (or heat rejection) in kWh
             current_two_day_cl_load = \
                 [0.] + self.two_day_hourly_peak_cl_loads[i]
+
+            # Ensure the peak load for the two-day load profile is the same or
+            # greater than the monthly peak load. This check is done in case
+            # the previous month contains a higher load than the current month.
+            load_diff = \
+                self.monthly_peak_cl[i] - max(current_two_day_cl_load)
             # monthly peak cooling load (or heat rejection) in kW
-            current_month_peak_cl = self.monthly_peak_cl[i]
+            if load_diff > 0.0:
+                current_month_peak_cl = self.monthly_peak_cl[i]
+            else:
+                current_month_peak_cl = max(current_two_day_cl_load)
+
             # monthly average cooling load (or heat rejection) in kW
             current_month_avg_cl = self.monthly_avg_cl[i]
 
@@ -475,8 +485,18 @@ class HybridLoad:
             # two day heating loads (or heat extraction) in kWh
             current_two_day_hl_load = \
                 [0.] + self.two_day_hourly_peak_hl_loads[i]
-            # monthly peak heating load (or heat extraction) in kW
-            current_month_peak_hl = self.monthly_peak_hl[i]
+
+            # Ensure the peak load for the two-day load profile is the same or
+            # greater than the monthly peak load. This check is done in case
+            # the previous month contains a higher load than the current month.
+            load_diff = \
+                self.monthly_peak_hl[i] - max(current_two_day_hl_load)
+            # monthly peak cooling load (or heat rejection) in kW
+            if load_diff > 0.0:
+                current_month_peak_hl = self.monthly_peak_hl[i]
+            else:
+                current_month_peak_hl = max(current_two_day_hl_load)
+
             # monthly average heating load (or heat extraction) in kW
             current_month_avg_hl = self.monthly_avg_hl[i]
 

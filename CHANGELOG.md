@@ -23,7 +23,8 @@ non-exhaustive list of the possible categories issues could fall in:
 
 ### Fixes
 
-* [Issue 79](https://github.com/j-c-cook/ghedt/issues/79) - Fixes the possibility for the peak load analysis tool to determine a negative peak load duration when the first month contains no load.  
+* [Issue 79](https://github.com/j-c-cook/ghedt/issues/79) - Fixes the possibility for the peak load analysis tool to determine a negative peak load duration when the first month contains no load.
+* [Issue 84](https://github.com/j-c-cook/ghedt/issues/84) - Fixes the two-day peak simulation to utilize the peak load from either the 48-hour profile or the current month.
 
 ## Version 0.1
 
