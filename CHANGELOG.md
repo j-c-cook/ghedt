@@ -18,11 +18,12 @@ non-exhaustive list of the possible categories issues could fall in:
 
 ### Enhances 
 
-* [Issue 81](https://github.com/j-c-cook/ghedt/issues/81) - The `near-square` design option in the `Design` object now requires the user to specify a land length which computes a maximum number of boreholes rather. This functionality replaces a hard-coded 32x32 maximum. 
+* [Issue 81](https://github.com/j-c-cook/ghedt/issues/81) - The `near-square` design option in the `Design` object now requires the user to specify a land length which computes a maximum number of boreholes rather. This functionality replaces a hard-coded 32x32 maximum.
 
 ### Fixes
 
-* [Issue 79](https://github.com/j-c-cook/ghedt/issues/79) - Fixes the possibility for the peak load analysis tool to determine a negative peak load duration when the first month contains no load.  
+* [Issue 79](https://github.com/j-c-cook/ghedt/issues/79) - Fixes the possibility for the peak load analysis tool to determine a negative peak load duration when the first month contains no load.
+* [Issue 84](https://github.com/j-c-cook/ghedt/issues/84) - Fixes the two-day peak simulation to utilize the peak load from either the 48-hour profile or the current month.
 
 ## Version 0.1
 
