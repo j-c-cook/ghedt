@@ -456,13 +456,25 @@ class HybridLoad:
             current_two_day_cl_load = \
                 [0.] + self.two_day_hourly_peak_cl_loads[i]
 
+            # This tolerance applies to the difference between the current
+            # months peak load and the maximum of the two-day load. If the
+            # absolute value of the difference between the current months
+            # peak load and the current two-day peak load is within this
+            # tolerance, then the maximum of the two-day load is equal to the
+            # maximum of the current month. If the absolute difference is
+            # greater than the tolerance, then the two-day peak load contains
+            # a load greater than the current months peak load. The tolerance
+            # could ONLY be exceeded when the first 24 hours is located in the
+            # previous month.
+            tol = 0.1
+
             # Ensure the peak load for the two-day load profile is the same or
             # greater than the monthly peak load. This check is done in case
             # the previous month contains a higher load than the current month.
             load_diff = \
                 self.monthly_peak_cl[i] - max(current_two_day_cl_load)
             # monthly peak cooling load (or heat rejection) in kW
-            if load_diff > 0.0:
+            if abs(load_diff) < tol:
                 current_month_peak_cl = self.monthly_peak_cl[i]
             else:
                 current_month_peak_cl = max(current_two_day_cl_load)
@@ -492,7 +504,7 @@ class HybridLoad:
             load_diff = \
                 self.monthly_peak_hl[i] - max(current_two_day_hl_load)
             # monthly peak cooling load (or heat rejection) in kW
-            if load_diff > 0.0:
+            if abs(load_diff) < tol:
                 current_month_peak_hl = self.monthly_peak_hl[i]
             else:
                 current_month_peak_hl = max(current_two_day_hl_load)
