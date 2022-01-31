@@ -38,7 +38,7 @@ class BaseGHE:
         # Radial numerical short time step
         self.radial_numerical = \
             plat.radial_numerical_borehole.RadialNumericalBH(self.bhe_eq)
-        self.radial_numerical.calc_sts_g_functions(self.bhe_eq)
+        self.radial_numerical.calc_sts_g_functions()
 
         # GFunction object
         self.GFunction = GFunction
@@ -291,7 +291,7 @@ class GHE(BaseGHE):
         # Solve for equivalent single U-tube
         self.bhe_eq = plat.equivalance.compute_equivalent(self.bhe)
         # Update short time step object with equivalent single u-tube
-        self.radial_numerical.calc_sts_g_functions(self.bhe_eq)
+        self.radial_numerical.calc_sts_g_functions()
         # Combine the short and long-term g-functions. The long term g-function
         # is interpolated for specific B/H and rb/H values.
         g = self.grab_g_function(B_over_H)
