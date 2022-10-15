@@ -15,7 +15,7 @@ class Design:
                  fluid: gt.media.Fluid, pipe: plat.media.Pipe,
                  grout: plat.media.Grout, soil: plat.media.Soil,
                  sim_params: plat.media.SimulationParameters,
-                 geometric_constraints: dt.media.GeometricConstraints,
+                 geometric_constraints: dt.geometry.Constraints,
                  hourly_extraction_ground_loads: list, method: str = 'hybrid',
                  routine: str = 'near-square', flow: str = 'borehole'):
         self.V_flow = V_flow  # volumetric flow rate, m3/s
