@@ -130,7 +130,7 @@ def main():
     # B is already defined above
     number_of_boreholes = 32
     length = dt.utilities.length_of_side(number_of_boreholes, B)
-    geometric_constraints = dt.media.GeometricConstraints(B=B, length=length)
+    geometric_constraints = dt.geometry.Constraints(B=B, length=length)
 
     # Single U-tube
     # -------------

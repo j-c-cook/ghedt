@@ -137,7 +137,7 @@ def main():
       - B_min
       - B_max
     """
-    geometric_constraints = dt.media.GeometricConstraints(
+    geometric_constraints = dt.geometry.Constraints(
         length=length, width=width, B_min=B_min, B_max_x=B_max_x,
         B_max_y=B_max_y)
 

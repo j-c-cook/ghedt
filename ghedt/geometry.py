@@ -2,7 +2,7 @@
 # Friday, December 10, 2021
 
 
-class GeometricConstraints:
+class Constraints:
     def __init__(self, length: float = None, width: float = None,
                  B: float = None, B_min: float = None,
                  B_max_x: float = None, B_max_y: float = None,
