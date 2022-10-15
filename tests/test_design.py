@@ -174,4 +174,4 @@ class TestNearSquare(unittest.TestCase, DesignBase):
         # Note: This reference was calculated on MacOS. It seems that on Linux
         # the values are not equal starting around the 9th decimal place.
         H_reference = 130.18183587536208
-        self.assertAlmostEqual(H_reference, H_single_u_tube_a, places=7)
+        self.assertAlmostEqual(H_reference, H_single_u_tube_a, places=6)
