@@ -43,6 +43,14 @@ class Constraints:
             assert self.B_min is not None
             assert self.B_max_x is not None
             assert self.B_max_y is not None
+        elif method == 'bi-rectangle-cutout':
+            assert self.length is not None
+            assert self.width is not None
+            assert self.B_min is not None
+            assert self.B_max_x is not None
+            assert self.B_max_y is not None
+            assert self.outer_constraints is not None
+            assert self.no_go is not None
 
         return
 
