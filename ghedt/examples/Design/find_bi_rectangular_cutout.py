@@ -46,7 +46,7 @@ def main():
     ugt = 18.3  # Undisturbed ground temperature (degrees Celsius)
     soil = plat.media.Soil(k_s, rhoCp_s, ugt)
     # Grout
-    grout = plat.media.ThermalProperty(k_g, rhoCp_g)
+    grout = plat.media.Grout(k_g, rhoCp_g)
 
     # Inputs related to fluid
     # -----------------------
@@ -88,7 +88,7 @@ def main():
 
     # --------------------------------------------------------------------------
 
-    # Rectangular design constraints are the land and range of B-spacing
+    # Design constraints are the land and range of B-spacing
     length = 85.  # m
     width = 80  # m
     B_min = 4.45  # m
