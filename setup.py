@@ -13,7 +13,10 @@ setup(name='ghedt',
                         'numpy>=1.21.5',
                         'scipy>=1.7.3',
                         'matplotlib>=3.5.1',
-                        'opencv-python==4.5.4.58'],
+                        'opencv-python==4.5.4.58'
+                        'pandas >= 1.3.2',
+                        'openpyxl >= 3.0.8'
+                        ],
       url='https://github.com/j-c-cook/ghedt',
       download_url='https://github.com/j-c-cook/ghedt/archive/v0.3.tar.gz',
       long_description=long_description,
