@@ -47,7 +47,7 @@ class Design:
         # Check the routine parameter
         self.routine = routine
         available_routines = ['near-square', 'rectangle', 'bi-rectangle',
-                              'bi-zoned']
+                              'bi-zoned', 'bi-rectangle-cutout']
         self.geometric_constraints.check_inputs(self.routine)
         gc = self.geometric_constraints
         if routine in available_routines:
@@ -76,10 +76,35 @@ class Design:
                 self.coordinates_domain_nested = \
                     dt.domains.bi_rectangle_zoned_nested(
                         gc.length, gc.width, gc.B_min, gc.B_max_x, gc.B_max_y)
+            elif routine == 'bi-rectangle-cutout':
+                _length = self.geometric_constraints.length
+                _width = self.geometric_constraints.width
+                _B_min = self.geometric_constraints.B_min
+                _B_max_x = self.geometric_constraints.B_max_x
+                _B_max_y = self.geometric_constraints.B_max_y
+                coordinates_domain_nested = dt.domains.bi_rectangle_nested(
+                    _length, _width, _B_min, _B_max_x, _B_max_y
+                )
+
+                coordinates_domain_nested_cutout = []
+                for i in range(len(coordinates_domain_nested)):
+                    new_coordinates_domain = []
+                    for j in range(len(coordinates_domain_nested[i])):
+                        coordinates = coordinates_domain_nested[i][j]
+                        new_coordinates = dt.geometry.remove_cutout(
+                            coordinates,
+                            boundary=self.geometric_constraints.no_go
+                        )
+                        new_coordinates_domain.append(new_coordinates)
+                    coordinates_domain_nested_cutout.append(
+                        new_coordinates_domain)
+
+                self.coordinates_domain_nested = \
+                    coordinates_domain_nested_cutout
         else:
-            raise ValueError('The requested routine is not available. '
-                             'The currently available routines are: '
-                             '`near-square`.')
+            raise ValueError(f'The requested routine is not available. '
+                             f'The currently available routines are: '
+                             f'{self.available_routines}.')
         self.flow = flow
 
     def find_design(self, disp=False):
@@ -111,6 +136,12 @@ class Design:
         # Find bi-zoned rectangle
         elif self.routine == 'bi-zoned':
             bisection_search = dt.search_routines.BisectionZD(
+                self.coordinates_domain_nested, self.V_flow, self.borehole,
+                self.bhe_object, self.fluid, self.pipe, self.grout, self.soil,
+                self.sim_params, self.hourly_extraction_ground_loads,
+                method=self.method, flow=self.flow, disp=disp)
+        elif self.routine == 'bi-rectangle-cutout':
+            bisection_search = dt.search_routines.Bisection2D(
                 self.coordinates_domain_nested, self.V_flow, self.borehole,
                 self.bhe_object, self.fluid, self.pipe, self.grout, self.soil,
                 self.sim_params, self.hourly_extraction_ground_loads,
