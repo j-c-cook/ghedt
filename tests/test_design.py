@@ -3,12 +3,11 @@
 import copy
 import unittest
 import os
+import csv
 
 import ghedt as dt
 import ghedt.peak_load_analysis_tool as plat
 import pygfunction as gt
-
-import pandas as pd
 
 
 TESTDATA_FILENAME = os.path.join(os.path.dirname(__file__),
@@ -128,11 +127,13 @@ class TestNearSquare(unittest.TestCase, DesignBase):
         # Process loads from file
         # -----------------------
         # read in the csv file and convert the loads to a list of length 8760
-        hourly_extraction: dict = \
-            pd.read_csv(TESTDATA_FILENAME).to_dict('list')
-        # Take only the first column in the dictionary
-        self.hourly_extraction_ground_loads: list = \
-            hourly_extraction[list(hourly_extraction.keys())[0]]
+        hourly_extraction: list = []
+        with open(TESTDATA_FILENAME) as csvfile:
+            reader = csv.reader(csvfile, delimiter=',')
+            for i, row in enumerate(reader):
+                if i != 0 or i > 8760:
+                    hourly_extraction.append(float(row[0]))
+        self.hourly_extraction_ground_loads = hourly_extraction
 
         # Geometric constraints for the `near-square` routine
         # Required geometric constraints for the uniform rectangle design: B
