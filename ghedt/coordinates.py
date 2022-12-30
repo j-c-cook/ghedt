@@ -1,6 +1,15 @@
 # Jack C. Cook
 # Tuesday, October 26, 2021
 
+def scale_coordinates(coordinates, scale):
+    new_coordinates = []
+    for i in range(len(coordinates)):
+        x, y = coordinates[i]
+        x *= scale
+        y *= scale
+        new_coordinates.append((x, y))
+    return new_coordinates
+
 
 def transpose_coordinates(coordinates):
     coordinates_transposed = []

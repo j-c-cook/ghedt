@@ -1,19 +1,58 @@
 # Jack C. Cook
-# Wednesday, January 15, 2020
-import copy
+# Friday, December 10, 2021
 
+import copy
 import numpy as np
 import cv2
+import ghedt as dt
 
 
-def scale_coordinates(coordinates, scale):
-    new_coordinates = []
-    for i in range(len(coordinates)):
-        x, y = coordinates[i]
-        x *= scale
-        y *= scale
-        new_coordinates.append((x, y))
-    return new_coordinates
+class Constraints:
+    def __init__(self, length: float = None, width: float = None,
+                 B: float = None, B_min: float = None,
+                 B_max_x: float = None, B_max_y: float = None,
+                 outer_constraints: list = None, no_go: list = None):
+        # Spacing parameters in meters
+        self.B = B
+        self.B_max_x = B_max_x
+        self.B_max_y = B_max_y
+        self.B_min = B_min
+        # Length and width constraints
+        self.length = length
+        self.width = width
+        # Outer constraints described as a polygon
+        self.outer_constraints = outer_constraints
+        # TODO: Handling for a list or a list of lists to occur later
+        # Note: the entirety of the no-go zone should fall inside the
+        # outer_constraints
+        self.no_go = no_go
+
+    def check_inputs(self, method):
+        # The required instances for the near-square design is self.B
+        if method == 'near-square':
+            assert self.B is not None
+            assert self.length is not None
+        elif method == 'rectangle':
+            assert self.width is not None
+            assert self.length is not None
+            assert self.B_min is not None
+            assert self.B_max_x is not None
+        elif method == 'bi-rectangle' or 'bi-zoned':
+            assert self.width is not None
+            assert self.length is not None
+            assert self.B_min is not None
+            assert self.B_max_x is not None
+            assert self.B_max_y is not None
+        elif method == 'bi-rectangle-cutout':
+            assert self.length is not None
+            assert self.width is not None
+            assert self.B_min is not None
+            assert self.B_max_x is not None
+            assert self.B_max_y is not None
+            assert self.outer_constraints is not None
+            assert self.no_go is not None
+
+        return
 
 
 def remove_cutout(coordinates, boundary=None, remove_inside=True,
@@ -24,8 +63,8 @@ def remove_cutout(coordinates, boundary=None, remove_inside=True,
     # cv2.pointPolygonTest only takes integers, so we scale by 10000 and then
     # scale back to keep precision
     scale = 10000.
-    coordinates = scale_coordinates(coordinates, scale)
-    boundary = scale_coordinates(boundary, scale)
+    coordinates = dt.coordinates.scale_coordinates(coordinates, scale)
+    boundary = dt.coordinates.scale_coordinates(boundary, scale)
 
     _boundary = np.array(boundary, dtype=np.uint64)
 
@@ -74,7 +113,7 @@ def remove_cutout(coordinates, boundary=None, remove_inside=True,
             else:
                 new_coordinates.append(coordinates[i])
 
-    new_coordinates = scale_coordinates(new_coordinates, 1/scale)
+    new_coordinates = dt.coordinates.scale_coordinates(new_coordinates, 1/scale)
 
     return new_coordinates
 

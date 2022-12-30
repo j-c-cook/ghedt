@@ -5,6 +5,5 @@ from . import coordinates
 from . import utilities
 from . import domains
 from . import search_routines
-from . import feature_recognition
-from . import media
+from . import geometry
 from . import design

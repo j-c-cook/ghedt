@@ -354,7 +354,7 @@ def polygonal_land_constraint(property_boundary, B_min, B_max_x, B_max_y,
         building_description = []
 
     outer_rectangle = \
-        dt.feature_recognition.determine_largest_rectangle(property_boundary)
+        dt.geometry.determine_largest_rectangle(property_boundary)
 
     x, y = list(zip(*outer_rectangle))
     length = max(x)
@@ -370,12 +370,12 @@ def polygonal_land_constraint(property_boundary, B_min, B_max_x, B_max_y,
         for j in range(len(coordinates_domain_nested[i])):
             coordinates = coordinates_domain_nested[i][j]
             # Remove boreholes outside of property
-            new_coordinates = dt.feature_recognition.remove_cutout(
+            new_coordinates = dt.geometry.remove_cutout(
                 coordinates, boundary=property_boundary, remove_inside=False)
             # Remove boreholes inside of building
             if len(new_coordinates) == 0:
                 continue
-            new_coordinates = dt.feature_recognition.remove_cutout(
+            new_coordinates = dt.geometry.remove_cutout(
                 new_coordinates, boundary=building_description,
                 remove_inside=True, keep_contour=False)
             new_coordinates_domain.append(new_coordinates)
