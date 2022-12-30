@@ -12,7 +12,7 @@ and a folder that contains examples.
 ├── coordinates.py
 ├── design.py
 ├── domains.py
-├── feature_recognition.py
+├── geometry.py
 ├── gfunction.py
 ├── ground_heat_exchangers.py
 ├── media.py
