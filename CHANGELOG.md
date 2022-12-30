@@ -14,7 +14,13 @@ non-exhaustive list of the possible categories issues could fall in:
 - Fixes - for any bug fixes
 - Documentation - for changes to the package that are purely for purposes of documentation
 
-## Version 0.2 
+## Current version
+
+### New features
+
+* [Issue 77](https://github.com/j-c-cook/ghedt/issues/77) - The geometrical constraints and design objects are enhanced to support design of bi-rectangular fields containing no-drilling zones.
+
+## Version 0.2/0.3 
 
 ### Enhances 
 
