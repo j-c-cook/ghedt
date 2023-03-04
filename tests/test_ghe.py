@@ -111,7 +111,7 @@ class TestGHE(unittest.TestCase):
 
         # -----------------------
         # Fluid properties
-        self.fluid = gt.media.Fluid(mixer=mixer, percent=percent)
+        self.fluid = gt.media.Fluid(mixer, percent)
         self.V_flow_system = V_flow_borehole * float(
             Nx * Ny)  # System volumetric flow rate (L/s)
         # Total fluid mass flow rate per borehole (kg/s)
