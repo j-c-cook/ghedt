@@ -1,6 +1,3 @@
-# Jack C. Cook
-# Monday, August 16, 2021
-
 import pygfunction as gt
 import ghedt.peak_load_analysis_tool as plat
 
@@ -57,14 +54,11 @@ def main():
 
     print(double_u_tube_parallel)
 
-    R_b_series = double_u_tube_series.compute_effective_borehole_resistance()
-    R_B_parallel = \
-        double_u_tube_parallel.compute_effective_borehole_resistance()
-
     # Intermediate variables
     Re = plat.borehole_heat_exchangers.compute_Reynolds(
         double_u_tube_parallel.m_flow_pipe, r_in, epsilon, fluid)
 
+    print("Parallel")
     print('Reynolds number: {}'.format(Re))
     R_p = double_u_tube_parallel.R_p
     print('Pipe resistance (K/(W/m)) : {}'.format(R_p))
@@ -72,11 +66,24 @@ def main():
     print('Convection coefficient (W/m2.K): {}'.format(h_f))
     R_fp = double_u_tube_parallel.R_fp
     print('Convective resistance (K/(W/m)): {}'.format(R_fp))
+    R_b_parallel = \
+        double_u_tube_parallel.compute_effective_borehole_resistance()
+    print('Borehole thermal resistance (parallel): {0:.4f} m.K/W'.
+          format(R_b_parallel))
 
+    print("Series")
+    Re = plat.borehole_heat_exchangers.compute_Reynolds(
+        double_u_tube_series.m_flow_pipe, r_in, epsilon, fluid)
+    print('Reynolds number: {}'.format(Re))
+    R_p = double_u_tube_series.R_p
+    print('Pipe resistance (K/(W/m)) : {}'.format(R_p))
+    h_f = double_u_tube_series.h_f
+    print('Convection coefficient (W/m2.K): {}'.format(h_f))
+    R_fp = double_u_tube_series.R_fp
+    print('Convective resistance (K/(W/m)): {}'.format(R_fp))
+    R_b_series = double_u_tube_series.compute_effective_borehole_resistance()
     print('Borehole thermal resistance (series): {0:.4f} m.K/W'.
           format(R_b_series))
-    print('Borehole thermal resistance (parallel): {0:.4f} m.K/W'.
-          format(R_B_parallel))
 
     # Create a borehole top view
     fig = double_u_tube_series.visualize_pipes()
