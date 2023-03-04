@@ -1,25 +1,25 @@
-# Ground Heat Exchanger Design Toolbox
+# Ground Heat Exchanger Design Tool
 
 A package with the novel capability of automatically selecting ground heat 
 exchanger configurations based on polygonal land constraints. This package 
 contains advanced methods that are the first of their kind. The results are 
 validated against the world renowned `GLHEPRO` (Cook 2021).
 
-The Ground Heat Exchanger Design Toolbox (GHEDT) is a Python package that can 
+The Ground Heat Exchanger Design Tool (DT) is a Python package that can 
 quantify the short- and long-term thermal interaction in a ground heat exchanger 
 (GHE). The long-term thermal response g-functions are computed live-time with 
-[pygfunction][#pygfunction]. The GHEDT contains a fast monthly hybrid time step 
+[pygfunction][#pygfunction]. The DT contains a fast monthly hybrid time step 
 simulation for prediction of heat pump entering fluid temperatures over a design 
-life. GHEDT can vary the size (or borehole height) of a specified borehole field 
+life. The DT can vary the size (or borehole height) of a specified borehole field 
 to ensure the heat pump entering fluid temperature remains within specified 
-bounds. GHEDT contains a novel borehole configuration selection algorithm.
+bounds. DT contains a novel borehole configuration selection algorithm.
 
 ## Novel Design Algorithms
 
-GHEDT contains a novel design methodology for automated selection of borehole 
+DT contains a novel design methodology for automated selection of borehole 
 fields. The advanced methodology performs optimization based on a target 
 drilling depth. An integer bisection routine is utilized to quickly search 
-over a unimodal domain of boreholes. GHEDT can consider available drilling and 
+over a unimodal domain of boreholes. DT can consider available drilling and 
 no-drilling zones defined as polygons. 
 
 The selection process shown below is performed in less than half a minute on an 
@@ -30,8 +30,7 @@ information.
 
 ## Requirements 
 
-GHEDT requires at least Python 3.7 and is tested with Python 3.7 and 3.8. GHEDT 
-is dependent on the following packages:
+`ghedt` requires at least Python 3.7 and is tested with Python 3.7 and 3.8, and is dependent on the following packages:
 
 - pygfunction (>=2.1)
 - numpy (>=1.19.2)
@@ -58,9 +57,9 @@ See [installation](https://github.com/j-c-cook/ghedt/blob/main/INSTALLATION.md)
 for more notes on installing. See [ghedt/examples/](https://github.com/j-c-cook/ghedt/tree/main/ghedt/examples) 
 for usage.   
 
-## Citing GHEDT 
+## Citing the Design Tool
 
-GHEDT and other related work is described in the following thesis: 
+The Ground Heat Exchanger Design Tool and other related work is described in the following thesis: 
 
 ```angular2html
 Cook, J.C. (2021). Development of Computer Programs for Fast Computation of 
@@ -88,12 +87,7 @@ or [start][#start] a [discussion][#discussion].
   
 
 ## Acknowledgements
-The initial release of this work (`ghedt-v0.1`) was financially supported by the 
-U.S. Department of Energy through research subcontracts from Oak Ridge National 
-Laboratory and the National Renewable Energy Laboratory, and by OSU through the 
-Center for Integrated Building Systems, the OG&E Energy Technology Chair, and 
-Oklahoma State University via return of indirect costs to Dr. Jeffrey D. 
-Spitler.
+The initial release of this work (`ghedt-v0.1`) was financially supported by the U.S. Department of Energy contract DE‐AC05‐00OR22725 through research subcontracts from Oak Ridge National Laboratory. Dr. Jeffrey D. Spitler was integral to the successful development, mostly through advice and feedback. 
 
 [#pygfunction]: https://github.com/MassimoCimmino/pygfunction
 [#pip]: https://pip.pypa.io/en/latest/
