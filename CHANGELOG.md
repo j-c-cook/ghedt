@@ -9,14 +9,20 @@ non-exhaustive list of the possible categories issues could fall in:
 - Enhancements - for improvements made to code performance and functionality
 - Maintenance - for tidying code
 - Changed - for changes in functionality of the code
-- Depracated - for soon-to-be removed features
+- Deprecated - for soon-to-be removed features
 - Removed - for removed features
 - Fixes - for any bug fixes
 - Documentation - for changes to the package that are purely for purposes of documentation
 
-## Version 0.2 
+## Current version
 
-### Enhances 
+### Enhancements
+
+- A warning is printed to the console when the inputs to the bisection search routine are such that the maximum field in the domain contains more than 2500 boreholes ([#110](https://github.com/j-c-cook/ghedt/issues/110)).
+
+## Version 0.2 and 0.3
+
+### Enhancements
 
 * [Issue 81](https://github.com/j-c-cook/ghedt/issues/81) - The `near-square` design option in the `Design` object now requires the user to specify a land length which computes a maximum number of boreholes rather. This functionality replaces a hard-coded 32x32 maximum.
 * [Issue 85](https://github.com/j-c-cook/ghedt/issues/85) - Enhances the `Design` API to accept the simulation method (hybrid or hourly) used for searching fields.

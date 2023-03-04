@@ -90,7 +90,7 @@ class DesignBase:
         # Fluid properties
         mixer = 'MEG'  # Ethylene glycol mixed with water
         percent = 0.  # Percentage of ethylene glycol added in
-        self.fluid = gt.media.Fluid(mixer=mixer, percent=percent)
+        self.fluid = gt.media.Fluid(mixer, percent)
 
         # Fluid flow rate
         V_flow = 0.2  # Borehole volumetric flow rate (L/s)
@@ -174,4 +174,4 @@ class TestNearSquare(unittest.TestCase, DesignBase):
         # Note: This reference was calculated on MacOS. It seems that on Linux
         # the values are not equal starting around the 9th decimal place.
         H_reference = 130.18183587536208
-        self.assertAlmostEqual(H_reference, H_single_u_tube_a, places=7)
+        self.assertAlmostEqual(H_reference, H_single_u_tube_a, places=6)

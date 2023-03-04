@@ -7,6 +7,7 @@ import ghedt.peak_load_analysis_tool as plat
 from ghedt.utilities import sign, check_bracket
 import numpy as np
 import copy
+from sys import stderr
 
 
 class Bisection1D:
@@ -116,6 +117,13 @@ class Bisection1D:
         xR_idx = len(self.coordinates_domain) - 1
         if self.disp:
             print('Do some initial checks before searching.')
+        _nbh_max_warn = 2500
+        if len(self.coordinates_domain[xR_idx]) > _nbh_max_warn:
+            print(f'Info: The maximum number of boreholes in the domain '
+                  f'exceeds {_nbh_max_warn} boreholes. Expect the initial '
+                  f'checks to take some time. To decrease search time, '
+                  f'consider increasing the minimum borehole spacing.',
+                  file=stderr)
         # Get the lowest possible excess temperature from minimum height at the
         # smallest location in the domain
         T_0_lower = self.calculate_excess(self.coordinates_domain[xL_idx],
