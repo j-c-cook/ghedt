@@ -155,16 +155,8 @@ class SingleUTube(BasePipe, gt.pipes.SingleUTube):
             self.fluid = fluid
 
         self.compute_resistances()
-
-        self.R_fp = self.R_f + self.R_p
-
-        # Delta-circuit thermal resistances
-        self._Rd = gt.pipes.thermal_resistances(
-            self.pos, self.r_out, self.b.r_b, self.k_s, self.k_g, self.R_fp,
-            J=self.J)[1]
-
-        # Initialize stored_coefficients
-        self._initialize_stored_coefficients()
+        R_fp = self.R_f + self.R_p
+        self.update_thermal_resistances(R_fp)
 
         # Note: This is the local borehole resistance
         # # Evaluate borehole thermal resistance
@@ -217,15 +209,9 @@ class MultipleUTube(BasePipe, gt.pipes.MultipleUTube):
 
         self.compute_resistances()
 
-        self.R_fp = self.R_f + self.R_p
-
-        # Delta-circuit thermal resistances
-        self._Rd = gt.pipes.thermal_resistances(
-            self.pos, self.r_out, self.b.r_b, self.k_s, self.k_g, self.R_fp,
-            J=self.J)[1]
-
-        # Initialize stored_coefficients
-        self._initialize_stored_coefficients()
+        self.compute_resistances()
+        R_fp = self.R_f + self.R_p
+        self.update_thermal_resistances(R_fp)
 
         # Note: This is the local borehole resistance
         # # Evaluate borehole thermal resistance
@@ -429,27 +415,10 @@ class CoaxialPipe(CoaxialBase, gt.pipes.Coaxial, BasePipe):
 
         # Compute resistances that are stored by pygfunction
         # Inner fluid to inner anulus fluid resistance
-        self.R_ff = self.R_f_in + self.R_p_in + self.R_f_a_in
+        R_ff = self.R_f_in + self.R_p_in + self.R_f_a_in
         # Outer annulus fluid to pipe thermal resistance
-        self.R_fp = self.R_p_out + self.R_f_a_out
-
-        # Determine the indexes of the inner and outer pipes
-        iInner = self.r_out.argmin()
-        iOuter = self.r_out.argmax()
-        # Outer pipe to borehole wall thermal resistance
-        R_fg = gt.pipes.thermal_resistances(
-            self.pos, self.r_out[iOuter], self.b.r_b, self.soil.k,
-            self.grout.k, self.R_fp, J=self.J)[1][0]
-
-        # Delta-circuit thermal resistances
-        self._Rd = np.zeros((2 * self.nPipes, 2 * self.nPipes))
-        self._Rd[iInner, iInner] = np.inf
-        self._Rd[iInner, iOuter] = self.R_ff
-        self._Rd[iOuter, iInner] = self.R_ff
-        self._Rd[iOuter, iOuter] = R_fg
-
-        # Initialize stored_coefficients
-        self._initialize_stored_coefficients()
+        R_fp = self.R_p_out + self.R_f_a_out
+        self.update_thermal_resistances(R_ff, R_fp)
 
         # Note: This is the local borehole resistance
         # # Evaluate borehole thermal resistance
