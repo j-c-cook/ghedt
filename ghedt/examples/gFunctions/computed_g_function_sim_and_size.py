@@ -1,13 +1,10 @@
-# Jack C. Cook
-# Monday, December 20, 2021
-
-# Purpose: Show how to simulate and size a g-function that has been previously
-# computed and stored in a `cpgfunction-output` style json file.
-
 import ghedt.peak_load_analysis_tool as plat
 import pandas as pd
 import pygfunction as gt
 import ghedt as dt
+
+# Purpose: Show how to simulate and size a g-function that has been previously
+# computed and stored in a `cpgfunction-output` style json file.
 
 
 def main():

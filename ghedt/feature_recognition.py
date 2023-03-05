@@ -1,5 +1,3 @@
-# Jack C. Cook
-# Wednesday, January 15, 2020
 import copy
 
 import numpy as np

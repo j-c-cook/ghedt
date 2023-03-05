@@ -1,5 +1,3 @@
-# Jack C. Cook
-# Wednesday, September 8, 2021
 import copy
 
 from calendar import monthrange

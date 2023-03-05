@@ -1,17 +1,14 @@
-# Jack C. Cook
-# Tuesday, January 11, 2022
+import ghedt as dt
+import ghedt.peak_load_analysis_tool as plat
+import pygfunction as gt
+import pandas as pd
+from time import time as clock
 
 # Purpose: Design a constrained bi-zoned rectangular field using the common
 # design interface with a single U-tube, multiple U-tube and coaxial tube
 # borehole heat exchanger.
 
 # This search is described in section 4.4.3 from pages 138-143 in Cook (2021).
-
-import ghedt as dt
-import ghedt.peak_load_analysis_tool as plat
-import pygfunction as gt
-import pandas as pd
-from time import time as clock
 
 
 def main():

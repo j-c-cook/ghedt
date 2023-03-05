@@ -1,5 +1,3 @@
-# Jack C. Cook
-# Thursday, September 16, 2021
 import copy
 import warnings
 

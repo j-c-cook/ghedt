@@ -1,5 +1,3 @@
-# Jack C. Cook
-# Friday, December 10, 2021
 
 
 class GeometricConstraints:

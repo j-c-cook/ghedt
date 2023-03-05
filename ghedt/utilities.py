@@ -1,5 +1,9 @@
-# Jack C. Cook
-# Tuesday, October 26, 2021
+import copy
+import numpy as np
+import json
+from matplotlib.ticker import Locator
+import pickle
+import warnings
 
 # utilities.py - this module contains general utility functions. The functions
 # are categorically grouped by their purpose. If any one of these categories
@@ -7,13 +11,6 @@
 # functions of that category. Some of these functions may be more applicable
 # to a different module. If that is the case, the function needs to contain a
 # deprecation warning until the next major release.
-
-import copy
-import numpy as np
-import json
-from matplotlib.ticker import Locator
-import pickle
-import warnings
 
 
 # Time functions

@@ -1,6 +1,3 @@
-# Jack C. Cook
-# Wednesday, September 8, 2021
-
 import numpy as np
 
 

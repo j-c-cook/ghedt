@@ -1,5 +1,8 @@
-# Jack C. Cook
-# Sunday, December 26, 2021
+import ghedt as dt
+import ghedt.peak_load_analysis_tool as plat
+import pygfunction as gt
+import pandas as pd
+from time import time as clock
 
 # Purpose: Design a constrained rectangular field using the common design
 # interface with a single U-tube, multiple U-tube and coaxial tube borehole
@@ -7,13 +10,6 @@
 
 # This is the uniform constrained rectangular search from Cook (2021) discussed
 # in section 4.4 from pages 129-133.
-
-
-import ghedt as dt
-import ghedt.peak_load_analysis_tool as plat
-import pygfunction as gt
-import pandas as pd
-from time import time as clock
 
 
 def main():

@@ -1,16 +1,13 @@
-# Jack C. Cook
-# Sunday, December 26, 2021
-
-# Purpose: Design a square or near-square field using the common design
-# interface with a single U-tube, multiple U-tube and coaxial tube.
-
-# This search is described in section 4.3.2 of Cook (2021) from pages 123-129.
-
 import ghedt as dt
 import ghedt.peak_load_analysis_tool as plat
 import pygfunction as gt
 import pandas as pd
 from time import time as clock
+
+# Purpose: Design a square or near-square field using the common design
+# interface with a single U-tube, multiple U-tube and coaxial tube.
+
+# This search is described in section 4.3.2 of Cook (2021) from pages 123-129.
 
 
 def main():

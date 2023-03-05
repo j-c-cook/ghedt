@@ -1,6 +1,3 @@
-# Jack C. Cook
-# Monday, August 16, 2021
-
 import pygfunction as gt
 from copy import deepcopy
 from numpy import pi, log, sqrt

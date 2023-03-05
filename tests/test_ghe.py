@@ -1,6 +1,3 @@
-# Jack C. Cook
-# Monday, October 11, 2021
-
 import unittest
 import os
 

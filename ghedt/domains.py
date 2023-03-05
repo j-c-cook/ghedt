@@ -1,5 +1,3 @@
-# Jack C. Cook
-# Wednesday, October 27, 2021
 import copy
 
 import ghedt as dt
