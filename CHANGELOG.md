@@ -7,7 +7,7 @@ a hyper-reference in a pertinent category and given a description. Here is a
 non-exhaustive list of the possible categories issues could fall in:
 - New features - for new features
 - Enhancements - for improvements made to code performance and functionality
-- Maintenance - for tidying code
+- Maintenance - for tidying code (refactoring and updates)
 - Changed - for changes in functionality of the code
 - Deprecated - for soon-to-be removed features
 - Removed - for removed features
@@ -16,13 +16,11 @@ non-exhaustive list of the possible categories issues could fall in:
 
 ## Current version
 
-### Enhancements
-
-- A warning is printed to the console when the inputs to the bisection search routine are such that the maximum field in the domain contains more than 2500 boreholes ([#110](https://github.com/j-c-cook/ghedt/issues/110)).
-
 ### Maintenance
 
-- The effective borehole thermal resistance function call is updated to use a function with long-term support. The previously used function has been deprecated ([#102](https://github.com/j-c-cook/ghedt/issues/102)). 
+- A warning is printed to the console when the inputs to the bisection search routine are such that the maximum field in the domain contains more than 2500 boreholes ([#110](https://github.com/j-c-cook/ghedt/issues/110)).
+- The effective borehole thermal resistance function call is updated to use a function with long-term support. The previously used function has been deprecated ([#102](https://github.com/j-c-cook/ghedt/issues/102)).
+- The update thermal resistance functions now rely on an `update_thermal_resistances` abstract method in pygfunction's base pipe object ([#103](https://github.com/j-c-cook/ghedt/issues/103)).
 
 ### Tests and CI
 
