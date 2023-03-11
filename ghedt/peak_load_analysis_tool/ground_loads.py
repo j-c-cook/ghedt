@@ -304,13 +304,14 @@ class HybridLoad:
 
             # Day of month the peak heating load occurs
             # day of the month on which peak clg load occurs (e.g. 1-31)
-            self.monthly_peak_cl_day[i] = \
-                math.floor(month_rejection_loads.index(
-                    self.monthly_peak_cl[i]) / hours_in_day)
-            # day of the month on which peak clg load occurs (e.g. 1-31)
+            if self.monthly_peak_cl_day[i] == 0:
+                self.monthly_peak_cl_day[i] = 1
+                # day of the month on which peak clg load occurs (e.g. 1-31)
             self.monthly_peak_hl_day[i] = \
                 math.floor(month_extraction_loads.index(
                     self.monthly_peak_hl[i]) / hours_in_day)
+            if self.monthly_peak_hl_day[i] == 0:
+                self.monthly_peak_hl_day[i] = 1
 
             hours_in_previous_months += hours_in_month
 
