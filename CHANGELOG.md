@@ -15,7 +15,7 @@ in:
 - Fixes - for any bug fixes
 - Documentation - for changes to the package that are purely for purposes of documentation
 
-## Current version
+## Version 0.3.1
 
 ### Bug fixes
 
