@@ -189,7 +189,7 @@ class Loads:
             self.monthly_average[i] = self.monthly_total[i] / len(month_loads)
 
             # Day of month the peak load occurs (e.g. 1-31)
-            self.monthly_peak_day[i] = math.floor(month_loads.index(
+            self.monthly_peak_day[i] = math.ceil(month_loads.index(
                 self.monthly_peak[i]) / hours_in_day)
 
             hours_in_previous_months += hours_in_month
@@ -208,8 +208,9 @@ class Loads:
         # for the possibility that a peak load occurs on the first day of the
         # year
 
-        hourly_rejection_loads = \
-            self.hourly[hours_in_year-hours_in_day:hours_in_year] + self.hourly
+        hourly_loads = \
+            self.hourly[hours_in_year-hours_in_day:hours_in_year] + \
+            self.hourly + self.hourly[0:hours_in_day]
 
         # Keep track of how many hours are in
         # start at 24 since we added the last day of the year to the beginning
@@ -225,7 +226,7 @@ class Loads:
 
             # monthly cooling loads (or heat rejection) in kWh
             two_day_hourly_peak_load = \
-                hourly_rejection_loads[monthly_peak_hour_start:monthly_peak_hour_start+2*hours_in_day]
+                hourly_loads[monthly_peak_hour_start:monthly_peak_hour_start+2*hours_in_day]
 
             assert len(two_day_hourly_peak_load) == 2*hours_in_day
 
@@ -675,13 +676,18 @@ class HybridLoad:
         rejection: list = []
         extraction: list = []
 
-        for i in range(len(self.hourly_extraction_loads)):
+        # cooling loads (or heat rejection)
+        cl = self.rejection
+        # heating loads (or heat extraction)
+        hl = self.extraction
+
+        for i in range(len(hl.hourly)):
             if self.hourly_rejection_loads[i] != 0.0:
-                rejection.append((i, -self.hourly_rejection_loads[i]))
-            if self.hourly_extraction_loads[i] != 0.0:
+                rejection.append((i, -hl.hourly[i]))
+            if cl.hourly[i] != 0.0:
                 # Flip the sign back negative because split_heat_and_cool made
                 # all loads positive
-                extraction.append((i, self.hourly_extraction_loads[i]))
+                extraction.append((i, cl.hourly[i]))
 
         fig = gt.gfunction._initialize_figure()
         ax = fig.add_subplot(111)

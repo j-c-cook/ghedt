@@ -3,8 +3,9 @@
 The purpose is to track changes throughout the versions in a way that is easy to
 comprehend. The changes provided here reference a specific Github issue. 
 Prior to an issue being merged into the `main` branch, the issue is listed as
-a hyper-reference in a pertinent category and given a description. Here is a 
-non-exhaustive list of the possible categories issues could fall in:
+a hyper-reference in a pertinent category and given a description. The 
+following is a non-exhaustive list of the possible categories issues could fall 
+in:
 - New features - for new features
 - Enhancements - for improvements made to code performance and functionality
 - Maintenance - for tidying code (refactoring and updates)
@@ -15,6 +16,10 @@ non-exhaustive list of the possible categories issues could fall in:
 - Documentation - for changes to the package that are purely for purposes of documentation
 
 ## Current version
+
+### Bug fixes
+
+- A rounding error for the peak load day in the hybrid time step module is fixed ([#82](https://github.com/j-c-cook/ghedt/issues/82)).
 
 ### Maintenance
 
