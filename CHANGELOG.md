@@ -21,6 +21,7 @@ non-exhaustive list of the possible categories issues could fall in:
 - A warning is printed to the console when the inputs to the bisection search routine are such that the maximum field in the domain contains more than 2500 boreholes ([#110](https://github.com/j-c-cook/ghedt/issues/110)).
 - The effective borehole thermal resistance function call is updated to use a function with long-term support. The previously used function has been deprecated ([#102](https://github.com/j-c-cook/ghedt/issues/102)).
 - The update thermal resistance functions now rely on an `update_thermal_resistances` abstract method in pygfunction's base pipe object ([#103](https://github.com/j-c-cook/ghedt/issues/103)).
+- The `ground_loads` module in the peak load analysis tool is refactored by encapsulating shared functionality between the rejection and extraction loads ([#118](https://github.com/j-c-cook/ghedt/issues/118)).
 
 ### Tests and CI
 
