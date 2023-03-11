@@ -16,6 +16,10 @@ non-exhaustive list of the possible categories issues could fall in:
 
 ## Current version
 
+### Bug fixes
+
+- A rounding error for the peak load day in the hybrid time step module is fixed ([#82](https://github.com/j-c-cook/ghedt/issues/82)).
+
 ### Maintenance
 
 - A warning is printed to the console when the inputs to the bisection search routine are such that the maximum field in the domain contains more than 2500 boreholes ([#110](https://github.com/j-c-cook/ghedt/issues/110)).
