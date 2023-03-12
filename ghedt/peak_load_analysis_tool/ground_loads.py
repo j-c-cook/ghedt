@@ -189,7 +189,7 @@ class Loads:
             self.monthly_average[i] = self.monthly_total[i] / len(month_loads)
 
             # Day of month the peak load occurs (e.g. 1-31)
-            self.monthly_peak_day[i] = math.ceil(month_loads.index(
+            self.monthly_peak_day[i] = math.floor(month_loads.index(
                 self.monthly_peak[i]) / hours_in_day)
 
             hours_in_previous_months += hours_in_month
@@ -361,7 +361,7 @@ class Loads:
         # hybrid time step.)
         # Catch the first and last peak hours to make sure they aren't 0
         # Could only be 0 when the first month has no load.
-        _hours_to_mid_day = (self.monthly_peak_day[m_idx] - 1) * 24 + 12
+        _hours_to_mid_day = (self.monthly_peak_day[m_idx] - 0) * 24 + 12
         _half_peak_duration = (self.monthly_peak_duration[m_idx] / 2)
         first_hour_peak = \
             firstmonthhour(total_months) + _hours_to_mid_day - _half_peak_duration
